@@ -32,55 +32,55 @@ def letters_list(input_string):
 letters = letters_list(term1_input + term2_input + result_input)
 variables = set(letters)
 
-domains = {
-    term1_input[0]: list(range(1, 10)),
-    term2_input[0]: list(range(1, 10)),
-    result_input[0]: list(range(1, 10)),
-}
-for letter in variables:
-    domains.setdefault(letter,list(range(0, 10)))
-
-
-def constraint_unique(variables, values):
-    return len(values) == len(set(values))  # remove repeated values and count
-
-def constraint_add(variables, values):
-    term1 = ""
-    for i in range(0,len(term1_input)):
-        term1 += str(values[i]) # value of the letter
-    term1 = int(term1)
-
-    term2 = ""
-    term2_limit = len(term1_input) + len(term2_input) #
-    for i in range(len(term1_input),term2_limit):
-        term2 += str(values[i]) # value of the letter
-    
-    term2 = int(term2)
-
-    result = ""
-    result_limit = term2_limit + len(result_input)
-    for i in range(term2_limit,result_limit):
-        result += str(values[i]) # value of the letter
-    result = int(result)
-
-    return (term1 + term2) == result
-
-constraints = [
-    (variables, constraint_unique),
-    (letters, constraint_add),
-]
-
 with col3:
     st.write("  ")
     button = st.button("Solve!",use_container_width=True)
 
-st.write("  ")
-st.write("  ")
-st.write("  ")
-st.write("  ")
-st.write("  ")
 
 if button:
+    domains = {
+        term1_input[0]: list(range(1, 10)),
+        term2_input[0]: list(range(1, 10)),
+        result_input[0]: list(range(1, 10)),
+    }
+    for letter in variables:
+        domains.setdefault(letter,list(range(0, 10)))
+
+
+    def constraint_unique(variables, values):
+        return len(values) == len(set(values))  # remove repeated values and count
+
+    def constraint_add(variables, values):
+        term1 = ""
+        for i in range(0,len(term1_input)):
+            term1 += str(values[i]) # value of the letter
+        term1 = int(term1)
+
+        term2 = ""
+        term2_limit = len(term1_input) + len(term2_input) #
+        for i in range(len(term1_input),term2_limit):
+            term2 += str(values[i]) # value of the letter
+        
+        term2 = int(term2)
+
+        result = ""
+        result_limit = term2_limit + len(result_input)
+        for i in range(term2_limit,result_limit):
+            result += str(values[i]) # value of the letter
+        result = int(result)
+
+        return (term1 + term2) == result
+
+    constraints = [
+        (variables, constraint_unique),
+        (letters, constraint_add),
+    ]
+    st.write("  ")
+    st.write("  ")
+    st.write("  ")
+    st.write("  ")
+    st.write("  ")
+
     problem = CspProblem(variables, domains, constraints)
     output = backtrack(problem)
     number1 = ""
