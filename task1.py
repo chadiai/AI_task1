@@ -7,20 +7,20 @@ st.write("  ")
 col1,col2,col3,col4,col5 = st.columns(5)
 
 with col1:
-    term1_input = st.text_input("Enter first term: ").upper()
+    term1_input = st.text_input("Enter first term: ",value="TO").upper()
 
 with col2:
     st.write("  ")
     st.subheader("+",anchor=False)
 with col3:
-    term2_input = st.text_input("Enter second term: ").upper()
+    term2_input = st.text_input("Enter second term: ",value="GO").upper()
 
 with col4:
     st.write("  ")
     st.subheader("=",anchor=False)
 
 with col5:
-    result_input = st.text_input("Enter the result: ").upper()
+    result_input = st.text_input("Enter the result: ",value="OUT").upper()
 
 
 
